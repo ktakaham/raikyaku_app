@@ -31,16 +31,16 @@ WildRydes.map = WildRydes.map || {};
 		}
 
 		$.ajax({
-				type: 'GET', // 省略可（省略時は"GET"）
-				url: _config.api.invokeUrl + '/user',
-				headers: {
-					Authorization: authToken
-				},
-				dataType: 'json'
-			})
-			.done(function(data) {
+			type: 'GET', // 省略可（省略時は"GET"）
+			url: _config.api.invokeUrl + '/user',
+			headers: {
+				Authorization: authToken
+			},
+			dataType: 'json'
+		})
+			.done(function (data) {
 				var i = 0; //インデックス用
-				$.each(data.result, function(key, item) {
+				$.each(data.result, function (key, item) {
 					var tr;
 					tr = $("<label class=\"list-group-item\">");
 					tr.append("<input type=\"checkbox\" class=\"form-check-input mr-2\" value=\"" + item.user_id + "\">" + item.lastname + " " + item.firstname + "</label>");
@@ -48,7 +48,33 @@ WildRydes.map = WildRydes.map || {};
 					i++;
 				});
 			})
-			.fail(function(jqXHR, textStatus, errorThrown) {
+			.fail(function (jqXHR, textStatus, errorThrown) {
+				console.log("ajax通信に失敗しました");
+				console.log("XMLHttpRequest : " + jqXHR.status);
+				console.log("textStatus     : " + textStatus);
+				console.log("errorThrown    : " + errorThrown.message);
+				console.log("authToken      : " + authToken);
+				console.log("url            : " + _config.api.invokeUrl);
+			});
+
+		$.ajax({
+			type: 'GET', // 省略可（省略時は"GET"）
+			url: _config.api.invokeUrl + '/church',
+			headers: {
+				Authorization: authToken
+			},
+			dataType: 'json'
+		})
+			.done(function (data) {
+				var i = 0; //インデックス用
+				$.each(data.result, function (key, item) {
+					var tr;
+					tr = $("<option value=\"" + item.church_name + "\">" + item.church_name + "</option>");
+					$('#churchInputform').append(tr);
+					i++;
+				});
+			})
+			.fail(function (jqXHR, textStatus, errorThrown) {
 				console.log("ajax通信に失敗しました");
 				console.log("XMLHttpRequest : " + jqXHR.status);
 				console.log("textStatus     : " + textStatus);
