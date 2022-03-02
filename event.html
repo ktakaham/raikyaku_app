@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+	<title>メンバー一覧</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Serverless web application example">
+	<meta name="author" content="">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/ride.css">
+</head>
+
+<body>
+
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-light bg-white">
+			<div class="container-fluid">
+				<button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01" aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fas fa-bars"></i>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarExample01">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item active">
+							<a class="nav-link" aria-current="page" href="./index.html">ホーム</a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="./ride.html">登録</a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="./member.html">一覧</a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="./map.html">地図</a>
+						</li>
+					</ul>
+				</div>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 text-right">
+							<button type="button" id="signOut" class="btn btn-primary">ログアウト</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<div class="alert alert-primary" role="alert">
+		<ul class="list-group" id="updates"></ul>
+	</div>
+
+	<div id="noApiMessage" class="configMessage" style="display: none;">
+		<div class="backdrop"></div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Successfully Authenticated!</h3>
+			</div>
+			<div class="panel-body">
+				<p>This page is not functional yet because there is no API invoke URL configured in <a href="/js/config.js">/js/config.js</a>. You'll configure this in Module 3.</p>
+				<p>In the meantime, if you'd like to test the Amazon Cognito user pool authorizer for your API, use the auth token below:</p>
+				<textarea class="authToken"></textarea>
+			</div>
+		</div>
+	</div>
+
+	<div id="noCognitoMessage" class="configMessage" style="display: none;">
+		<div class="backdrop"></div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">No Cognito User Pool Configured</h3>
+			</div>
+			<div class="panel-body">
+				<p>There is no user pool configured in <a href="/js/config.js">/js/config.js</a>. You'll configure this in Module 2 of the workshop.</p>
+			</div>
+		</div>
+	</div>
+
+	<div id="main">
+		<div class="container">
+			<div class="navbar">
+				<h1>出席登録</h1>
+			</div>
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">集会名<span class="badge bg-danger ml-2">必須</span></label>
+					<div class="col-sm-10">
+						<input type="tel" name="tel" class="form-control" placeholder="集会名" required id="eventInputform" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2">チャペル<span class="badge bg-danger ml-2">必須</span></label>
+					<div class="col-sm-10">
+						<select name="church" class="form-control mr-2" id="churchInputform" required>
+							<option selected="">----</option>
+						</select>
+					</div>
+				</div>
+				<div class="list-group">
+					<label class="col-sm-2">参加者<span class="badge bg-danger ml-2">必須</span></label>
+					<div class="membersList col-sm-10">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" id="submit" class="btn btn-primary">登録する</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div id="authTokenModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="authToken">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Your Auth Token</h4>
+				</div>
+				<div class="modal-body">
+					<textarea class="authToken"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/vendor/jquery-3.1.0.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	<script src="js/vendor/aws-cognito-sdk.min.js"></script>
+	<script src="js/vendor/amazon-cognito-identity.min.js"></script>
+	<script src="https://js.arcgis.com/4.3/"></script>
+	<script src="js/config.js"></script>
+	<script src="js/cognito-auth.js"></script>
+	<script src="js/event.js"></script>
+</body>
+
+</html>

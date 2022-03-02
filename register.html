@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+	<title>アカウント登録</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Serverless web application example">
+	<meta name="author" content="">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/ride.css">
+</head>
+
+<body>
+	<div id="noCognitoMessage" class="configMessage" style="display: none;">
+		<div class="backdrop"></div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">No Cognito User Pool Configured</h3>
+			</div>
+			<div class="panel-body">
+				<p>There is no user pool configured in <a href="/js/config.js">/js/config.js</a>. You'll configure this in Module 2 of the workshop.</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- <section class="form-wrap">
+		<h1>登録</h1>
+		<form id="registrationForm">
+			<input type="email" id="emailInputRegister" placeholder="メールアドレス" pattern=".*" required>
+			<input type="password" id="passwordInputRegister" placeholder="パスワード" pattern=".*" required>
+			<input type="password" id="password2InputRegister" placeholder="パスワード確認" pattern=".*" required>
+			<input type="submit" value="アカウント登録">
+		</form>
+	</section> -->
+
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-light bg-white">
+			<div class="container-fluid">
+				<button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01" aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fas fa-bars"></i>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarExample01">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item active">
+							<a class="nav-link" aria-current="./index.html" href="./index.html">ホーム</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<section class="form-wrap">
+		<div class="container">
+			<div class="navbar">
+				<h1>アカウント登録</h1>
+			</div>
+			<form id="registrationForm">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">メールアドレス</label>
+					<div class="col-sm-10">
+						<input type="email" class="form-control" placeholder="メールアドレス" id="emailInputRegister" required />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">パスワード</label>
+					<div class="col-sm-10">
+						<input type="password" class="form-control" placeholder="パスワード" id="passwordInputRegister" pattern=".*" required />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">パスワード</label>
+					<div class="col-sm-10">
+						<input type="password" class="form-control" placeholder="パスワード確認" id="password2InputRegister" pattern=".*" required />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" value="アカウント登録" class="btn btn-primary">アカウント登録</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+
+
+	<script src="js/vendor/jquery-3.1.0.js"></script>
+	<script src="js/vendor/bootstrap.min.js"></script>
+	<script src="js/vendor/aws-cognito-sdk.min.js"></script>
+	<script src="js/vendor/amazon-cognito-identity.min.js"></script>
+	<script src="js/config.js"></script>
+	<script src="js/cognito-auth.js"></script>
+</body>
+
+</html>

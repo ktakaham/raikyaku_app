@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+	<title>メンバー登録</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Serverless web application example">
+	<meta name="author" content="">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/ride.css">
+</head>
+
+<body>
+
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-light bg-white">
+			<div class="container-fluid">
+				<button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01" aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fas fa-bars"></i>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarExample01">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item active">
+							<a class="nav-link" aria-current="page" href="./index.html">ホーム</a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="./ride.html">登録</a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="./member.html">一覧</a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="./map.html">地図</a>
+						</li>
+					</ul>
+				</div>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 text-right">
+							<button type="button" id="signOut" class="btn btn-primary">ログアウト</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<div class="alert alert-primary" role="alert">
+		<ul class="list-group" id="updates"></ul>
+	</div>
+
+	<div id="noApiMessage" class="configMessage" style="display: none;">
+		<div class="backdrop"></div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Successfully Authenticated!</h3>
+			</div>
+			<div class="panel-body">
+				<p>This page is not functional yet because there is no API invoke URL configured in <a href="/js/config.js">/js/config.js</a>. You'll configure this in Module 3.</p>
+				<p>In the meantime, if you'd like to test the Amazon Cognito user pool authorizer for your API, use the auth token below:</p>
+				<textarea class="authToken"></textarea>
+			</div>
+		</div>
+	</div>
+
+	<div id="noCognitoMessage" class="configMessage" style="display: none;">
+		<div class="backdrop"></div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">No Cognito User Pool Configured</h3>
+			</div>
+			<div class="panel-body">
+				<p>There is no user pool configured in <a href="/js/config.js">/js/config.js</a>. You'll configure this in Module 2 of the workshop.</p>
+			</div>
+		</div>
+	</div>
+
+	<div id="main">
+		<div class="container">
+			<div class="navbar">
+				<h1>教会メンバー登録</h1>
+			</div>
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">お名前<span class="badge bg-danger ml-2">必須</span></label>
+					<div class="form-inline col-sm-10">
+						<input type="text" name="SecondName" class="form-control mr-2" placeholder="姓" required id="nameInputform" />
+						<input type="text" name="FirstName" class="form-control" placeholder="名" required id="firstnameInputform" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">電話番号<span class="badge bg-danger ml-2">必須</span></label>
+					<div class="col-sm-10">
+						<input type="tel" name="tel" class="form-control" placeholder="電話番号" required id="telInputform" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">郵便番号<span class="badge bg-danger ml-2">必須</span></label>
+					<div class="col-sm-10">
+						<input type="text" name="PostalCode" class="form-control" placeholder="郵便番号" required id="postcodeInputform" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">ご自宅住所<span class="badge bg-danger ml-2">必須</span></label>
+					<div class="col-sm-10">
+						<p><input type="text" name="pref" class="form-control" placeholder="都道府県" required id="prefInputform" /></p>
+						<p><input type="text" name="addr1" class="form-control" placeholder="市区町村" required id="cityInputform" /></p>
+						<p><input type="text" name="addr2" class="form-control" placeholder="番地" required id="addressInputform" /></p>
+						<p><input type="text" name="addr3" class="form-control" placeholder="アパート・マンション等" id="apartnameInputform" /></p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">メールアドレス<span class="badge bg-danger ml-2">必須</span></label>
+					<div class="col-sm-10">
+						<input type="email" name="email" class="form-control" placeholder="メールアドレス" required id="mailInputform" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">お勤め先</label>
+					<div class="col-sm-10">
+						<input type="text" name="company" class="form-control" placeholder="お勤め先" id="occupationInputform" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2">所属チャペル<span class="badge bg-danger ml-2">必須</span></label>
+					<div class="col-sm-10">
+						<select name="church" class="form-control mr-2" id="churchInputform" required >
+							<option selected="">----</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2">生年月日</label>
+					<div class="form-inline col-sm-10">
+						<select name="birthyear" class="form-control mr-2" id="birthyearInputform">
+							<option selected="">----</option>
+							<option value="2010">2010</option>
+							<option value="2009">2009</option>
+							<option value="2008">2008</option>
+							<option value="2007">2007</option>
+							<option value="2006">2006</option>
+							<option value="2005">2005</option>
+							<option value="2004">2004</option>
+							<option value="2003">2003</option>
+							<option value="2002">2002</option>
+							<option value="2001">2001</option>
+							<option value="2000">2000</option>
+							<option value="1999">1999</option>
+							<option value="1998">1998</option>
+							<option value="1997">1997</option>
+							<option value="1996">1996</option>
+							<option value="1995">1995</option>
+							<option value="1994">1994</option>
+							<option value="1993">1993</option>
+							<option value="1992">1992</option>
+							<option value="1991">1991</option>
+							<option value="1990">1990</option>
+							<option value="1989">1989</option>
+							<option value="1988">1988</option>
+							<option value="1987">1987</option>
+							<option value="1986">1986</option>
+							<option value="1985">1985</option>
+							<option value="1984">1984</option>
+							<option value="1983">1983</option>
+							<option value="1982">1982</option>
+							<option value="1981">1981</option>
+							<option value="1980">1980</option>
+							<option value="1979">1979</option>
+							<option value="1978">1978</option>
+							<option value="1977">1977</option>
+							<option value="1976">1976</option>
+							<option value="1975">1975</option>
+							<option value="1974">1974</option>
+							<option value="1973">1973</option>
+							<option value="1972">1972</option>
+							<option value="1971">1971</option>
+							<option value="1970">1970</option>
+							<option value="1969">1969</option>
+							<option value="1968">1968</option>
+							<option value="1967">1967</option>
+							<option value="1966">1966</option>
+							<option value="1965">1965</option>
+							<option value="1964">1964</option>
+							<option value="1963">1963</option>
+							<option value="1962">1962</option>
+							<option value="1961">1961</option>
+							<option value="1960">1960</option>
+							<option value="1959">1959</option>
+							<option value="1958">1958</option>
+							<option value="1957">1957</option>
+							<option value="1956">1956</option>
+							<option value="1955">1955</option>
+							<option value="1954">1954</option>
+							<option value="1953">1953</option>
+							<option value="1952">1952</option>
+							<option value="1951">1951</option>
+							<option value="1950">1950</option>
+						</select>
+						<label>年</label>
+						<select name="birthmonth" class="form-control mr-2 ml-2" id="birthmonthInputform">
+							<option selected="">--</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+						</select>
+						<label>月</label>
+						<select name="birthday" class="form-control mr-2 ml-2" id="birthdayInputform">
+							<option selected="">--</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+							<option value="16">16</option>
+							<option value="17">17</option>
+							<option value="18">18</option>
+							<option value="19">19</option>
+							<option value="20">20</option>
+							<option value="21">21</option>
+							<option value="22">22</option>
+							<option value="23">23</option>
+							<option value="24">24</option>
+							<option value="25">25</option>
+							<option value="26">26</option>
+							<option value="27">27</option>
+							<option value="28">28</option>
+							<option value="29">29</option>
+							<option value="30">30</option>
+							<option value="31">31</option>
+						</select>
+						<label>日</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" id="submit" class="btn btn-primary">登録する</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div id="authTokenModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="authToken">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Your Auth Token</h4>
+				</div>
+				<div class="modal-body">
+					<textarea class="authToken"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="js/vendor/jquery-3.1.0.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	<script src="js/vendor/aws-cognito-sdk.min.js"></script>
+	<script src="js/vendor/amazon-cognito-identity.min.js"></script>
+	<script src="https://js.arcgis.com/4.3/"></script>
+	<script src="js/config.js"></script>
+	<script src="js/cognito-auth.js"></script>
+	<script src="js/ride.js"></script>
+</body>
+
+</html>
