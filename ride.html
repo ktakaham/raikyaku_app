@@ -11,10 +11,10 @@
 	<meta name="author" content="">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 	<link rel="stylesheet" href="/css/ride.css">
+	<script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
 </head>
 
 <body>
-
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light bg-white">
 			<div class="container-fluid">
@@ -83,7 +83,7 @@
 			<div class="navbar">
 				<h1>教会メンバー登録</h1>
 			</div>
-			<form class="form-horizontal">
+			<form class="form-horizontal h-adr">
 				<div class="form-group">
 					<label class="col-sm-2 control-label">お名前<span class="badge bg-danger ml-2">必須</span></label>
 					<div class="form-inline col-sm-10">
@@ -102,16 +102,17 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">郵便番号<span class="badge bg-danger ml-2">必須</span></label>
 					<div class="col-sm-10">
-						<input type="text" name="PostalCode" class="form-control" placeholder="郵便番号" required id="postcodeInputform" />
+						<span class="p-country-name" style="display:none;">Japan</span>
+						<input type="text" name="PostalCode" class="form-control p-postal-code" placeholder="郵便番号" required id="postcodeInputform" minlength="7" maxlength="8" pattern="\d*" autocomplete="postal-code" />
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label class="col-sm-2 control-label">ご自宅住所<span class="badge bg-danger ml-2">必須</span></label>
 					<div class="col-sm-10">
-						<p><input type="text" name="pref" class="form-control" placeholder="都道府県" required id="prefInputform" /></p>
-						<p><input type="text" name="addr1" class="form-control" placeholder="市区町村" required id="cityInputform" /></p>
-						<p><input type="text" name="addr2" class="form-control" placeholder="番地" required id="addressInputform" /></p>
+						<p><input type="text" name="pref" class="form-control p-region" placeholder="都道府県" required id="prefInputform" autocomplete="address-level1"/></p>
+						<p><input type="text" name="addr1" class="form-control p-locality p-street-address" placeholder="市区町村" required id="cityInputform" autocomplete="address-level2"/></p>
+						<p><input type="text" name="addr2" class="form-control p-extended-address" placeholder="番地" required id="addressInputform" /></p>
 						<p><input type="text" name="addr3" class="form-control" placeholder="アパート・マンション等" id="apartnameInputform" /></p>
 					</div>
 				</div>
