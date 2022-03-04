@@ -8,7 +8,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="Serverless web application example">
 	<meta name="author" content="">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 	<link rel="stylesheet" href="/css/ride.css">
 </head>
 
@@ -20,7 +21,8 @@
 				<h3 class="panel-title">No Cognito User Pool Configured</h3>
 			</div>
 			<div class="panel-body">
-				<p>There is no user pool configured in <a href="/js/config.js">/js/config.js</a>. You'll configure this in Module 2 of the workshop.</p>
+				<p>There is no user pool configured in <a href="/js/config.js">/js/config.js</a>. You'll configure this
+					in Module 2 of the workshop.</p>
 			</div>
 		</div>
 	</div>
@@ -36,21 +38,37 @@
 	</section> -->
 
 	<header>
-		<nav class="navbar navbar-expand-lg navbar-light bg-white">
-			<div class="container-fluid">
-				<button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01" aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
-					<i class="fas fa-bars"></i>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarExample01">
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item active">
-							<a class="nav-link" aria-current="./index.html" href="./index.html">ホーム</a>
-						</li>
-					</ul>
-				</div>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		  <div class="container-fluid">
+			<a class="navbar-brand" href="#">来客くん</a>
+			<div class="collapse navbar-collapse" id="navbarExample01">
+			  <ul class="navbar-nav">
+				<li class="nav-item active">
+				  <a class="nav-link" aria-current="page" href="./event.html">来客登録</a>
+				</li>
+				<li class="nav-item active">
+				  <a class="nav-link" href="./ride.html">会員登録</a>
+				</li>
+				<li class="nav-item active">
+				  <a class="nav-link" href="./member.html">会員一覧</a>
+				</li>
+				<li class="nav-item active">
+				  <a class="nav-link" href="./map.html">地図</a>
+				</li>
+			  </ul>
 			</div>
+			<div class="container">
+			  <div class="row">
+				<div class="col-md-12 text-right">
+				  <button type="button" id="signOut" class="btn btn-primary">
+					ログアウト
+				  </button>
+				</div>
+			  </div>
+			</div>
+		  </div>
 		</nav>
-	</header>
+	  </header>
 
 	<section class="form-wrap">
 		<div class="container">
@@ -61,19 +79,22 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">メールアドレス</label>
 					<div class="col-sm-10">
-						<input type="email" class="form-control" placeholder="メールアドレス" id="emailInputRegister" required />
+						<input type="email" class="form-control" placeholder="メールアドレス" id="emailInputRegister"
+							required />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">パスワード</label>
 					<div class="col-sm-10">
-						<input type="password" class="form-control" placeholder="パスワード" id="passwordInputRegister" pattern=".*" required />
+						<input type="password" class="form-control" placeholder="パスワード" id="passwordInputRegister"
+							pattern=".*" required />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">パスワード</label>
 					<div class="col-sm-10">
-						<input type="password" class="form-control" placeholder="パスワード確認" id="password2InputRegister" pattern=".*" required />
+						<input type="password" class="form-control" placeholder="パスワード確認" id="password2InputRegister"
+							pattern=".*" required />
 					</div>
 				</div>
 				<div class="form-group">
