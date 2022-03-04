@@ -44,6 +44,7 @@ WildRydes.map = WildRydes.map || {};
 
   function completeRequest(result) {
     console.log("Ajax通信が成功しました");
+    window.location.href = "/done.html";
   }
 
   // Register click handler for #request button
