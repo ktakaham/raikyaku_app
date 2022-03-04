@@ -136,6 +136,7 @@ WildRydes.map = WildRydes.map || {};
     var userData = WildRydes.map.selectedPoint;
     WildRydes.map.event_name = $("#eventInputform").val();
     WildRydes.map.church_name = $("#churchInputform").val();
+    WildRydes.map.event_date = $("#eventdataInputform").val();
     var params = [];
     var event_id = WildRydes.map.event_name + "_" + getNowYMDhmsStr();
     //イベントマスター情報登録
@@ -143,7 +144,9 @@ WildRydes.map = WildRydes.map || {};
       event_id: event_id,
       user_id: event_id,
       event_name: WildRydes.map.event_name,
+      event_date: WildRydes.map.event_date,
       church_name: WildRydes.map.church_name,
+      master_flag: '1',
     });
     //参加者情報登録
     $(".chk").each(function () {
@@ -151,6 +154,10 @@ WildRydes.map = WildRydes.map || {};
         params.push({
           event_id: event_id,
           user_id: $(this).val(),
+          event_name: WildRydes.map.event_name,
+          event_date: WildRydes.map.event_date,
+          church_name: WildRydes.map.church_name,
+          master_flag: '0',
         });
       }
     });
