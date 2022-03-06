@@ -59,6 +59,7 @@ WildRydes.map = WildRydes.map || {};
 
   function completeRequest(result) {
     console.log("Ajax通信が成功しました");
+    window.location.href = "/done.html";
   }
 
   // Register click handler for #request button
@@ -112,6 +113,8 @@ WildRydes.map = WildRydes.map || {};
   });
 
   function handleRequestClick(event) {
+
+    // validateCheck(event);
     var userData = WildRydes.map.selectedPoint;
     WildRydes.map.email = $("#mailInputform").val();
     WildRydes.map.lastname = $("#nameInputform").val();
@@ -128,11 +131,24 @@ WildRydes.map = WildRydes.map || {};
     WildRydes.map.birthmonth = $("#birthmonthInputform").val();
     WildRydes.map.birthday = $("#birthdayInputform").val();
     userData = WildRydes.map;
-    console.log(userData);
+    console.log("post check");
 
     event.preventDefault();
     requestUnicorn(userData);
   }
+
+  // function validateCheck(event) {
+  //   const forms = document.querySelectorAll(".needs-validation");
+  //   console.log("validate check");
+
+  //   Array.prototype.slice.call(forms).forEach((form) => {
+  //     if (!form.checkValidity()) {
+  //       event.preventDefault();
+  //       event.stopPropagation();
+  //     }
+  //     form.classList.add("was-validated");
+  //   });
+  // }
 
   function displayUpdate(text) {
     $("#updates").append(
