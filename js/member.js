@@ -23,7 +23,7 @@ WildRydes.map = WildRydes.map || {};
     WildRydes.authToken.then(function updateAuthMessage(token) {
       if (token) {
         displayUpdate(
-          '認証されました. トークンを確認（ <a href="#authTokenModal" data-toggle="modal">auth token</a>）.'
+          '認証されました.'
         );
         $(".authToken").text(token);
       }
