@@ -54,7 +54,7 @@ WildRydes.map = WildRydes.map || {};
     WildRydes.authToken.then(function updateAuthMessage(token) {
       if (token) {
         displayUpdate(
-          '認証されました. トークンを確認（ <a href="#authTokenModal" data-toggle="modal">auth token</a>）.'
+          '認証されました.'
         );
         $(".authToken").text(token);
       }
@@ -137,8 +137,10 @@ WildRydes.map = WildRydes.map || {};
     var userData = WildRydes.map.selectedPoint;
     WildRydes.map.event_name = $("#eventInputform").val();
     WildRydes.map.church_name = $("#churchInputform").val();
+    WildRydes.map.event_type = $("#eventTypeInputform").val();
     WildRydes.map.event_date = $("#eventdataInputform").val();
     var params = [];
+    //event_nameに日時情報を追加してユニークID化させる
     var event_id = WildRydes.map.event_name + "_" + getNowYMDhmsStr();
     //イベントマスター情報登録
     params.push({
@@ -146,6 +148,7 @@ WildRydes.map = WildRydes.map || {};
       user_id: event_id,
       event_name: WildRydes.map.event_name,
       event_date: WildRydes.map.event_date,
+      event_type: WildRydes.map.event_type,
       church_name: WildRydes.map.church_name,
       master_flag: '1',
     });
@@ -157,6 +160,7 @@ WildRydes.map = WildRydes.map || {};
           user_id: $(this).val(),
           event_name: WildRydes.map.event_name,
           event_date: WildRydes.map.event_date,
+          event_type: WildRydes.map.event_type,
           church_name: WildRydes.map.church_name,
           master_flag: '0',
         });
