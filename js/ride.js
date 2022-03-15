@@ -30,6 +30,8 @@ WildRydes.map = WildRydes.map || {};
           email: userData.email,
           lastname: userData.lastname,
           firstname: userData.firstname,
+          lastnamekana: userData.lastnamekana,
+          firstnamekana: userData.firstnamekana,
           tel: userData.tel,
           postcode: userData.postcode,
           prefecture: userData.prefecture,
@@ -118,6 +120,8 @@ WildRydes.map = WildRydes.map || {};
     WildRydes.map.email = $("#mailInputform").val();
     WildRydes.map.lastname = $("#nameInputform").val();
     WildRydes.map.firstname = $("#firstnameInputform").val();
+    WildRydes.map.lastnamekana = $("#namekanaInputform").val();
+    WildRydes.map.firstnamekana = $("#firstnamekanaInputform").val();
     WildRydes.map.tel = $("#telInputform").val();
     WildRydes.map.postcode = $("#postcodeInputform").val();
     WildRydes.map.prefecture = $("#prefInputform").val();
