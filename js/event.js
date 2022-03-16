@@ -157,7 +157,6 @@ WildRydes.map = WildRydes.map || {};
           return a.lastname < b.lastname ? -1 : 1; //オブジェクトの昇順ソート
         });
 
-        var i = 0; //インデックス用
         $.each(data.result, function (key, item) {
           var tr;
           tr = $('<label class="list-group-item">');
@@ -171,7 +170,6 @@ WildRydes.map = WildRydes.map || {};
               "</label>"
           );
           $(".membersList").append(tr);
-          i++;
         });
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
