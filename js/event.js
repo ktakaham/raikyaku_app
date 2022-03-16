@@ -50,13 +50,11 @@ WildRydes.map = WildRydes.map || {};
   // Register click handler for #request button
   $(function onDocReady() {
     $("#submit").click(handleRequestClick);
-    $('[name=church]').change(handleChurchListClick);
+    $("[name=church]").change(handleChurchListClick);
 
     WildRydes.authToken.then(function updateAuthMessage(token) {
       if (token) {
-        displayUpdate(
-          '認証されました.'
-        );
+        displayUpdate("認証されました.");
         $(".authToken").text(token);
       }
     });
@@ -117,7 +115,7 @@ WildRydes.map = WildRydes.map || {};
       event_date: WildRydes.map.event_date,
       event_type: WildRydes.map.event_type,
       church_name: WildRydes.map.church_name,
-      master_flag: '1',
+      master_flag: "1",
     });
     //参加者情報登録
     $(".chk").each(function () {
@@ -129,7 +127,7 @@ WildRydes.map = WildRydes.map || {};
           event_date: WildRydes.map.event_date,
           event_type: WildRydes.map.event_type,
           church_name: WildRydes.map.church_name,
-          master_flag: '0',
+          master_flag: "0",
         });
       }
     });
@@ -154,6 +152,11 @@ WildRydes.map = WildRydes.map || {};
     })
       .done(function (data) {
         $(".membersList").empty();
+
+        data.result.sort(function (a, b) {
+          return a.lastname < b.lastname ? -1 : 1; //オブジェクトの昇順ソート
+        });
+
         var i = 0; //インデックス用
         $.each(data.result, function (key, item) {
           var tr;
@@ -187,15 +190,15 @@ WildRydes.map = WildRydes.map || {};
     );
   }
 
-  function getNowYMDhmsStr(){
-    const date = new Date()
-    const Y = date.getFullYear()
-    const M = ("00" + (date.getMonth()+1)).slice(-2)
-    const D = ("00" + date.getDate()).slice(-2)
-    const h = ("00" + date.getHours()).slice(-2)
-    const m = ("00" + date.getMinutes()).slice(-2)
-    const s = ("00" + date.getSeconds()).slice(-2)
-  
-    return Y + M + D + h + m + s
+  function getNowYMDhmsStr() {
+    const date = new Date();
+    const Y = date.getFullYear();
+    const M = ("00" + (date.getMonth() + 1)).slice(-2);
+    const D = ("00" + date.getDate()).slice(-2);
+    const h = ("00" + date.getHours()).slice(-2);
+    const m = ("00" + date.getMinutes()).slice(-2);
+    const s = ("00" + date.getSeconds()).slice(-2);
+
+    return Y + M + D + h + m + s;
   }
 })(jQuery);
