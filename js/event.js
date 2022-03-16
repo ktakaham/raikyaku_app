@@ -50,6 +50,7 @@ WildRydes.map = WildRydes.map || {};
   // Register click handler for #request button
   $(function onDocReady() {
     $("#submit").click(handleRequestClick);
+    $('[name=church]').change(handleChurchListClick);
 
     WildRydes.authToken.then(function updateAuthMessage(token) {
       if (token) {
@@ -64,41 +65,7 @@ WildRydes.map = WildRydes.map || {};
       $("#noApiMessage").show();
     }
 
-    $.ajax({
-      type: "GET", // 省略可（省略時は"GET"）
-      url: _config.api.invokeUrl + "/user",
-      headers: {
-        Authorization: authToken,
-      },
-      dataType: "json",
-    })
-      .done(function (data) {
-        var i = 0; //インデックス用
-        $.each(data.result, function (key, item) {
-          var tr;
-          tr = $('<label class="list-group-item">');
-          tr.append(
-            '<input type="checkbox" name="check" class="form-check-input chk" value="' +
-              item.user_id +
-              '">' +
-              item.lastname +
-              " " +
-              item.firstname +
-              "</label>"
-          );
-          $(".membersList").append(tr);
-          i++;
-        });
-      })
-      .fail(function (jqXHR, textStatus, errorThrown) {
-        console.log("ajax通信に失敗しました");
-        console.log("XMLHttpRequest : " + jqXHR.status);
-        console.log("textStatus     : " + textStatus);
-        console.log("errorThrown    : " + errorThrown.message);
-        console.log("authToken      : " + authToken);
-        console.log("url            : " + _config.api.invokeUrl);
-      });
-
+    //教会リスト取得処理
     $.ajax({
       type: "GET", // 省略可（省略時は"GET"）
       url: _config.api.invokeUrl + "/church",
@@ -169,6 +136,49 @@ WildRydes.map = WildRydes.map || {};
     userData = params;
     event.preventDefault();
     requestUnicorn(userData);
+  }
+
+  //ユーザ取得処理
+  function handleChurchListClick(event) {
+    event.preventDefault();
+    var church_para = $("#churchInputform").val();
+
+    // ユーザ一覧取得
+    $.ajax({
+      type: "GET", // 省略可（省略時は"GET"）
+      url: _config.api.invokeUrl + "/user?church=" + church_para,
+      headers: {
+        Authorization: authToken,
+      },
+      dataType: "json",
+    })
+      .done(function (data) {
+        $(".membersList").empty();
+        var i = 0; //インデックス用
+        $.each(data.result, function (key, item) {
+          var tr;
+          tr = $('<label class="list-group-item">');
+          tr.append(
+            '<input type="checkbox" name="check" class="form-check-input chk" value="' +
+              item.user_id +
+              '">' +
+              item.lastname +
+              " " +
+              item.firstname +
+              "</label>"
+          );
+          $(".membersList").append(tr);
+          i++;
+        });
+      })
+      .fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("ajax通信に失敗しました");
+        console.log("XMLHttpRequest : " + jqXHR.status);
+        console.log("textStatus     : " + textStatus);
+        console.log("errorThrown    : " + errorThrown.message);
+        console.log("authToken      : " + authToken);
+        console.log("url            : " + _config.api.invokeUrl);
+      });
   }
 
   function displayUpdate(text) {
