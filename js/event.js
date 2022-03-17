@@ -162,7 +162,6 @@ WildRydes.map = WildRydes.map || {};
         });
       }
     });
-
     userData = params;
     event.preventDefault();
     requestUnicorn(userData);
