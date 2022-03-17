@@ -26,7 +26,7 @@ WildRydes.map = WildRydes.map || {};
         Authorization: authToken,
       },
       data: JSON.stringify({
-        "UserData": userData
+        UserData: userData,
       }),
     })
       .done(function (data) {
@@ -62,6 +62,17 @@ WildRydes.map = WildRydes.map || {};
     if (!_config.api.invokeUrl) {
       $("#noApiMessage").show();
     }
+
+    //ゲスト参加者記入欄
+    $(document).on("click", ".add", function () {
+      $(this).parent().clone(true).insertAfter($(this).parent());
+    });
+    $(document).on("click", ".del", function () {
+      var target = $(this).parent();
+      if (target.parent().children().length > 1) {
+        target.remove();
+      }
+    });
 
     //教会リスト取得処理
     $.ajax({
@@ -107,6 +118,7 @@ WildRydes.map = WildRydes.map || {};
     var params = [];
     //event_nameに日時情報を追加してユニークID化させる
     var event_id = WildRydes.map.event_name + "_" + getNowYMDhmsStr();
+
     //イベントマスター情報登録
     params.push({
       event_id: event_id,
@@ -116,7 +128,9 @@ WildRydes.map = WildRydes.map || {};
       event_type: WildRydes.map.event_type,
       church_name: WildRydes.map.church_name,
       master_flag: "1",
+      guest_flag: "0",
     });
+
     //参加者情報登録
     $(".chk").each(function () {
       if (this.checked) {
@@ -128,6 +142,23 @@ WildRydes.map = WildRydes.map || {};
           event_type: WildRydes.map.event_type,
           church_name: WildRydes.map.church_name,
           master_flag: "0",
+          guest_flag: "0",
+        });
+      }
+    });
+
+    //ゲスト参加者情報登録
+    $(".chk_guest").each(function () {
+      if ($(this).val()) {
+        params.push({
+          event_id: event_id,
+          user_id: "guest_"+getNowYMDhmsStr()+"_"+$(this).val(),
+          event_name: WildRydes.map.event_name,
+          event_date: WildRydes.map.event_date,
+          event_type: WildRydes.map.event_type,
+          church_name: WildRydes.map.church_name,
+          master_flag: "0",
+          guest_flag: "1",
         });
       }
     });

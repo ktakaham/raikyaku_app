@@ -133,7 +133,22 @@
 
         <div class="form-group">
           <label class="col-sm-2">参加者</label>
-          <div class="membersList col-sm-10"></div>
+          <div class="membersList col-sm-10">
+            <label class="list-group-item">
+              <input type="checkbox" name="check" class="form-check-input chk" value="">--
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2">ゲスト参加者</label>
+          <div class="guestsList col-sm-10">
+            <div id="input_plural">
+              <input type="text" class="form-control chk_guest" placeholder="参加者名">
+              <input type="button" value="＋" class="add pluralBtn">
+              <input type="button" value="－" class="del pluralBtn">
+            </div>
+          </div>
         </div>
 
         <div class="form-group">
