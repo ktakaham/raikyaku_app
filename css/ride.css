@@ -67,3 +67,20 @@ li {
 }
 
 .resizeimage img { width: 100%; }
+
+#input_plural {
+  margin: 10px 0;
+}
+
+#input_plural input.form-control {
+  display: inline-block;
+  width: 84%;
+}
+
+#input_plural input.pluralBtn {
+  width: 37px;
+  height: 37px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 4px;
+}
