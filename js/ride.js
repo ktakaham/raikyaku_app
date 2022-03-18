@@ -5,26 +5,11 @@ WildRydes.map = WildRydes.map || {};
 
 (function rideScopeWrapper($) {
   var authToken;
-  WildRydes.authToken
-    .then(function setAuthToken(token) {
-      if (token) {
-        authToken = token;
-      } else {
-        window.location.href = "/signin.html";
-      }
-    })
-    .catch(function handleTokenError(error) {
-      alert(error);
-      window.location.href = "/signin.html";
-    });
 
   function requestUnicorn(userData) {
     $.ajax({
       method: "POST",
       url: _config.api.invokeUrl + "/ride",
-      headers: {
-        Authorization: authToken,
-      },
       data: JSON.stringify({
         UserData: {
           email: userData.email,
@@ -84,9 +69,6 @@ WildRydes.map = WildRydes.map || {};
     $.ajax({
       type: "GET", // 省略可（省略時は"GET"）
       url: _config.api.invokeUrl + "/church",
-      headers: {
-        Authorization: authToken,
-      },
       dataType: "json",
     })
       .done(function (data) {
